@@ -2,7 +2,6 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.regularizers import l2
 from keras.optimizers import SGD ,Adagrad
-from scipy.io import loadmat, savemat
 from keras.models import model_from_json
 import theano.tensor as T
 import theano
@@ -22,6 +21,16 @@ import numpy
 from datetime import datetime
 from scipy.spatial.distance import cdist,pdist,squareform
 import theano.sandbox
+
+from threading import Thread#, Lock
+import cv2
+import os
+import time
+import numpy as np
+
+from utils import DataClass, FPS, Detection, display_in_thread, detect_in_thread, fetch_in_thread, init_detection
+ 
+
 #import c3D_model
 #import Initialization_function
 #from moviepy.editor import VideoFileClip
@@ -34,38 +43,6 @@ import pickle
 from PyQt5 import QtWidgets   # If PyQt4 is not working in your case, you can try PyQt5, 
 seed = 7
 numpy.random.seed(seed)
-
-def load_model(json_path):
-    model = model_from_json(open(json_path).read())
-    return model
-
-def load_weights(model, weight_path):
-    dict2 = loadmat(weight_path)
-    dict = conv_dict(dict2)
-    i = 0
-    for layer in model.layers:
-        weights = dict[str(i)]
-        layer.set_weights(weights)
-        i += 1
-    return model
-
-def conv_dict(dict2): # Helper function to save the model
-    i = 0
-    dict = {}
-    for i in range(len(dict2)):
-        if str(i) in dict2:
-            if dict2[str(i)].shape == (0, 0):
-                dict[str(i)] = dict2[str(i)]
-            else:
-                weights = dict2[str(i)][0]
-                weights2 = []
-                for weight in weights:
-                    if weight.shape in [(1, x) for x in range(0, 5000)]:
-                        weights2.append(weight[0])
-                    else:
-                        weights2.append(weight)
-                dict[str(i)] = weights2
-    return dict
 
 
 def savitzky_golay(y, window_size, order, deriv=0, rate=1):
@@ -134,12 +111,9 @@ class PrettyWidget(QtWidgets.QWidget):
         btn = QtWidgets.QPushButton('ANOMALY DETECTION SYSTEM \n Please select video', self)
 
         #Model_dir = '/home/cvlab/Waqas_Data/Anomaly_Data/Pre_TrainedModels/L1L2/'
-        #Model_dir = './'
-        Model_dir = 'data/'
-        #weights_path = Model_dir + 'weights_L1L2.mat'
-        weights_path = Model_dir + 'fc_weights_L1L2.mat'
-        #model_path = Model_dir + 'model.json'
-        model_path = Model_dir + 'fc_model.json'
+        Model_dir = './'
+        weights_path = Model_dir + 'weights_L1L2.mat'
+        model_path = Model_dir + 'model.json'
         ########################################
         ######    LOAD ABNORMALITY MODEL   ######
         global model
@@ -182,7 +156,7 @@ class PrettyWidget(QtWidgets.QWidget):
         total_segments = np.linspace(1, Total_frames, num=33)
         print('total_segments b4 round : ', total_segments); #exit()
         total_segments = total_segments.round()
-        print('total_segments after round : ', total_segments); #exit()
+        print('total_segments after round : ', total_segments); exit()
         FeaturePath=(video_path)
         FeaturePath = FeaturePath[0:-4]
         FeaturePath = FeaturePath+ '.txt'
@@ -267,14 +241,26 @@ class PrettyWidget(QtWidgets.QWidget):
                 break
 
 
-def main():
-    #app = QtGui.QApplication(sys.argv)
-    app = QtWidgets.QApplication(sys.argv)
-    w = PrettyWidget()
-    app.exec_()
+      
 
+#fn_video, dir_yolo, th_confidence, th_nms_iou, COLORS, LABELS = init_detection()
+fn_video, w_h_net, json_fc, weight_mat_fc, json_c3d, h5_c3d = init_detection()
 
-main()
+class_data = DataClass()
 
+#thread_fetch  = Thread(target = fetch_in_thread, args = (class_data, fn_video, 8))
+thread_fetch  = Thread(target = fetch_in_thread, args = (class_data, fn_video, w_h_net, 16))
+thread_fetch.start()
 
+#thread_detect  = Thread(target = detect_in_thread, args = (class_data, dir_yolo, th_confidence, th_nms_iou, LABELS))
+thread_detect  = Thread(target = detect_in_thread, args = (class_data, json_fc, weight_mat_fc, json_c3d, h5_c3d, None))
+thread_detect.start()
+
+#thread_display  = Thread(target = display_in_thread, args = (class_data, COLORS))
+thread_display  = Thread(target = display_in_thread, args = (class_data, ))
+thread_display.start()
+
+thread_fetch.join()
+thread_detect.join()
+thread_display.join()
 
