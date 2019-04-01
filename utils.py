@@ -439,11 +439,10 @@ def detect_in_thread(class_data_proxy, json_fc, weight_mat_fc, json_c3d, h5_c3d,
         print("load_c3d_from_h5 is entered !!!")
         model_c3d_full = load_c3d_from_h5(json_c3d, h5_c3d)
     else:
-        model_c3d_full = create_and_load_c3d(weight_caffe_c3d, json_c3d, h5_c3d)
-    '''       
-    for layer in model_c3d_full.layers:
-        print(layer.name)
-    '''    
+        #model_c3d_full = create_and_load_c3d(weight_caffe_c3d, json_c3d, h5_c3d)
+        model_c3d_full = create_c3d(json_c3d, True)
+        model_c3d_full.load_weights(h5_c3d)
+
     #input_c3d_fc6 = model_c3d_full.get_layer(index = 0).input
     #input_c3d_fc6 = model_c3d_full.get_layer(index=0).input
     output_c3d_fc6 = model_c3d_full.get_layer('fc6').output
@@ -657,13 +656,15 @@ def init_detection():
     #w_h_net = (320, 240)
     w_h_net = (112, 112)
     fn_video = 0
+    
     dir_data = "data"
-
     json_c3d = os.path.sep.join([dir_data, "c3d_sports_1M_new_theano.json"])
     h5_c3d = os.path.sep.join([dir_data, "c3d_sports_1M_weights.h5"])
-    
+    '''    
     json_fc = os.path.sep.join([dir_data, "fc_model.json"])
     weight_mat_fc = os.path.sep.join([dir_data, "fc_weights_L1L2.mat"])
+    '''
+    json_fc = "model.json"; weight_mat_fc = "weights_L1L2.mat";
     
     th_confidence = 0.5
     th_nms_iou = 0.3
