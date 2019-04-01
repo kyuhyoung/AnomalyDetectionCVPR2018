@@ -1,3 +1,29 @@
+You will get an error message for the missing file "c3d_sports_1M_weights.h5" when playing cam version.
+
+The C3D weight file "c3d_sports_1M_weights.h5" can be downloaded from "https://www.dropbox.com/s/ypiwalgtlrtnw8b/c3d-sports1M_weights.h5?dl=0" and should be placed under the "data' folder.
+
+My environmnet was
+
+  * Python : 3.5.6
+
+  * Keras : 1.1.1
+
+  * Theano : 1.0.2
+
+The command line script for GPU + cam version was
+
+	$ env KERAS_BACKEND=theano CPLUS_INCLUDE_PATH=/usr/local/cuda/include THEANO_FLAGS='mode=FAST_RUN,device=cuda,floatX=float32' python Demo_cam.py
+
+The command line script for GPU + video file version was
+
+	$ env KERAS_BACKEND=theano CPLUS_INCLUDE_PATH=/usr/local/cuda/include THEANO_FLAGS='mode=FAST_RUN,device=cuda,floatX=float32' python Demo_GUI.py
+
+---
+
+
+
+
+
 DATASET:
 
 The dataset can be also downloaded from the following link:
