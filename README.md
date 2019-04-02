@@ -31,7 +31,7 @@ The command line script for CPU + cam version was
 
 	$ env KERAS_BACKEND=theano python Demo_cam.py
 
-  * The typical frame rates of CPU + cam version is as the following figure. (I don't know why fetch rate becomes so low. May be detection rate (almost 1 fps) had an influence on it. 
+  * The typical frame rates of CPU + cam version is as the following figure. (I don't know why fetch rate becomes so low. Maybe detection rate (almost 1 fps) had an influence on it. 
   
   ![fps_gpu](./img/anomaly_cpu.PNG)
 
