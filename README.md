@@ -1,3 +1,6 @@
+* I am trying to make a camera version of "WaqasSultani/AnomalyDetectionCVPR2018" which reads the stack of every 16 frames from camera and detects anomaly on that 16 frames.  (The GPU version on Titan X seems to work in realtime, 16-frame delayed though.)
+
+
 You will get an error message for the missing file "c3d_sports_1M_weights.h5" when playing cam version.
 
 The missing C3D weight file, "c3d_sports_1M_weights.h5" could not be uploaded due to spalce limit of my github account.  It can be downloaded from "https://www.dropbox.com/s/ypiwalgtlrtnw8b/c3d-sports1M_weights.h5?dl=0" and should be placed under the "data" folder.
