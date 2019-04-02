@@ -25,6 +25,8 @@ The command line script for GPU + video file version was
 	$ env KERAS_BACKEND=theano CPLUS_INCLUDE_PATH=/usr/local/cuda/include THEANO_FLAGS='mode=FAST_RUN,device=cuda,floatX=float32' python Demo_GUI.py
 
 
+
+
 The command line script for CPU + cam version was
 
 	$ env KERAS_BACKEND=theano python Demo_cam.py
