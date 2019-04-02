@@ -24,6 +24,19 @@ The command line script for GPU + video file version was
 
 	$ env KERAS_BACKEND=theano CPLUS_INCLUDE_PATH=/usr/local/cuda/include THEANO_FLAGS='mode=FAST_RUN,device=cuda,floatX=float32' python Demo_GUI.py
 
+
+The command line script for CPU + cam version was
+
+	$ env KERAS_BACKEND=theano python Demo_cam.py
+
+  * The typical frame rates of CPU + cam version is as the following figure. (I don't know why fetch rate becomes so low. May be detection rate (almost 1 fps) had an influence on it. 
+  
+  ![fps_gpu](./img/anomaly_cpu.PNG)
+
+The command line script for CPU + video file version was
+
+	$ env KERAS_BACKEND=theano python Demo_GUI.py
+
 ---
 
 
