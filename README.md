@@ -14,7 +14,7 @@ The command line script for GPU + cam version was
 
 	$ env KERAS_BACKEND=theano CPLUS_INCLUDE_PATH=/usr/local/cuda/include THEANO_FLAGS='mode=FAST_RUN,device=cuda,floatX=float32' python Demo_cam.py
 
-  * The typical frame rates of GPU + cam version is as the following figure.
+  * The typical frame rates (fetch/detection/display) of GPU + cam version is as the following figure.
   
   ![fps_gpu](./img/anomaly_gpu.PNG)
 
