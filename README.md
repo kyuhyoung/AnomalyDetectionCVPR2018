@@ -9,6 +9,8 @@ My environmnet was
   * Keras : 1.1.1
 
   * Theano : 1.0.2
+  
+  * Titax X (Pascal)  
 
 The command line script for GPU + cam version was
 
