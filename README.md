@@ -12,6 +12,8 @@ My environmnet was
   * Keras : 1.1.1
 
   * Theano : 1.0.2
+
+  * cv2 : 4.0.0
   
   * Titax X (Pascal)  
 
