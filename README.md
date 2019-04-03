@@ -1,4 +1,4 @@
-## I am trying to make a camera version of "WaqasSultani/AnomalyDetectionCVPR2018" which reads the stack of every 16 frames from camera and detects anomaly on that 16 frames.  (The GPU version on Titan X seems to work in realtime, 16-frame delayed though.)
+### I am trying to make a camera version of "WaqasSultani/AnomalyDetectionCVPR2018" which reads the stack of every 16 frames from camera and detects anomaly on that 16 frames.  (The GPU version on Titan X seems to work in realtime, 16-frame delayed though.)
 
 
 You will get an error message for the missing file "c3d_sports_1M_weights.h5" when playing cam version.
@@ -14,6 +14,8 @@ My environmnet was
   * Theano : 1.0.2
 
   * cv2 : 4.0.0
+  
+  * nccl : 2.4.2
   
   * Titax X (Pascal)  
 
