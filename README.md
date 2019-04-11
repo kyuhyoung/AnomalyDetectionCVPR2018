@@ -1,4 +1,6 @@
-### I am trying to make a camera version of "WaqasSultani/AnomalyDetectionCVPR2018" which reads the stack of every 16 frames from camera and detects anomaly on that 16 frames.  (The GPU version on Titan X seems to work in realtime, 16-frame delayed though.)
+## Kyuhyoung's README
+
+#### I am trying to make a camera version of "WaqasSultani/AnomalyDetectionCVPR2018" which reads the stack of every 16 frames from camera and detects anomaly on that 16 frames.  (The GPU version on Titan X seems to work in realtime, 16-frame delayed though.)
 
 
 You will get an error message for the missing file "c3d_sports_1M_weights.h5" when playing cam version.
@@ -46,9 +48,15 @@ The command line script for CPU + video file version was
 
 	$ env KERAS_BACKEND=theano python Demo_GUI.py
 
+### TODO
+
+* Verify that the C3D output of mine is the same as that of original authours by comparing the results from the same video clips.
+
+
 ---
 
 
+## Original author (WaqasSultani)'s README
 
 
 
